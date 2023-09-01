@@ -21,11 +21,11 @@
 .title {
   margin: 0 0 1rem;
   line-height: 1.15;
-  font-size: 3.6rem;
+  /* font-size: 3.6rem; */
 }
 
 .title {
-  text-align: center;
+  text-align: start;
 }
 
 .title,
@@ -44,8 +44,6 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-
-  max-width: 800px;
   margin-top: 3rem;
 }
 
@@ -79,8 +77,45 @@
   line-height: 1.5;
 }
 
-.logo {
-  height: 1em;
+.table{
+  overflow-x: auto;
+  align-self: center;
+  /* width: 80%; */
+}
+.row{
+  display: flex;
+  flex-direction: row;
+}
+
+.col{
+  border-bottom: 2px solid rgb(207, 207, 207);
+  padding: 10px 0 10px 0;
+}
+
+.label{
+  text-align: center;
+  background-color: #6813d828;
+  border-bottom: 3px solid #6913D8;
+  height: 40px;
+  width: 200px;
+  min-width: 180px;
+  line-height: 40px;
+  margin: 0;
+}
+
+.data{
+  text-align: center;
+  height: 40px;
+  width: 200px;
+  min-width: 180px;
+  line-height: 40px;
+  margin: 0;
+  font-size: small;
+  font-weight: 500;
+}
+.larger{
+  width: 250px;
+  min-width: 210px;
 }
 
 @media (max-width: 600px) {
