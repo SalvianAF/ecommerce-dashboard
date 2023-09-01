@@ -19,7 +19,7 @@
 }
 
 .title {
-  margin: 0 0 1rem;
+  margin-top: 20px;
   line-height: 1.15;
   /* font-size: 3.6rem; */
 }
@@ -80,7 +80,7 @@
 .table{
   overflow-x: auto;
   align-self: center;
-  /* width: 80%; */
+  width: 90%;
 }
 .row{
   display: flex;
@@ -105,7 +105,7 @@
 
 .data{
   text-align: center;
-  height: 40px;
+  height: auto;
   width: 200px;
   min-width: 180px;
   line-height: 40px;
@@ -113,9 +113,19 @@
   font-size: small;
   font-weight: 500;
 }
+
 .larger{
   width: 250px;
   min-width: 210px;
+}
+
+.container-head{
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-between;
+  align-self: center;
+  width: 90%;
 }
 
 @media (max-width: 600px) {

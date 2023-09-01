@@ -3,6 +3,8 @@ import styles from '../styles/Home.module.css';
 import Layout from '../components/layout';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import Pagination from '@mui/material/Pagination';
+import TextField from '@mui/material/TextField';
 
 
 // export async function getStaticProps() {
@@ -19,26 +21,39 @@ import { useState, useEffect } from 'react';
 
 export default function Home() {
   const [products, setProducts] = useState<any>([])
+  const [page, setPage] = useState<number>(0)
+  const [pages, setPages] = useState<number>(0)
+  const [search, setSearch] = useState<string>("")
 
   useEffect(() => {
     fetchproducts()
-  },[])
+  },[page, search])
 
   const fetchproducts = async() => {
-    await axios.get('https://dummyjson.com/products').then((res) => {
+    await axios.get(`https://dummyjson.com/products/search?q=${search}&limit=5&skip=${5*page}`).then((res) => {
       setProducts(res.data.products)
+      setPages(Math.ceil(res.data.total / 5) - 1) //total product pages
     })
+  
   } 
 
   return (
     <Layout>
-      {console.log(products)}
+      {console.log(page)}
       <Head>
         <title>Dashboard Products</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h2 className={styles.title}>Products List</h2>
+      <div className={styles["container-head"]}>
+        <h2 className={styles.title}>Products List</h2>
+        <TextField id="standard-basic" label="Search Product" variant="standard" sx={{mb:4, width:150}}
+         onChange={(e) => {
+          setSearch(e.target.value)
+          setPage(0)
+        }}
+        />
+      </div>
       <div className={styles.table}>
         <div className={styles.row}>
           <h5 className={`${styles.label} ${styles.larger}`}>Name</h5>
@@ -59,6 +74,8 @@ export default function Home() {
            </div>
         ))}
       </div>
+      <Pagination count={pages}  page={page+1}
+      onChange={(e,value) => setPage(value-1)} sx={{alignSelf:"end",mr:4, mt:2}}/>
     </Layout>
   )
 }
