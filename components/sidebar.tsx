@@ -14,6 +14,7 @@ import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import { useState } from 'react';
 import { IconButton } from '@mui/material';
+import Link from 'next/link';
 
 
 const drawerWidth = 240;
@@ -51,12 +52,16 @@ export default function SideBar(props: Props) {
                     >
                         <Menu />
                     </IconButton>
-                    <Typography variant="h5" noWrap component="div" fontWeight={700}>
-                        Dashboard
-                    </Typography>
-                    <Typography variant="h5" noWrap component="div" fontWeight={700} color='secondary'>
-                        !
-                    </Typography>
+                    <Link href="/">
+                        <Box sx={{ display: 'flex' , flexDirection:'row'}}>
+                            <Typography variant="h5" noWrap component="div" fontWeight={700}>
+                                Dashboard
+                            </Typography>
+                            <Typography variant="h5" noWrap component="div" fontWeight={700} color='secondary'>
+                                !
+                            </Typography>
+                        </Box>
+                    </Link>
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -75,22 +80,26 @@ export default function SideBar(props: Props) {
             <div>
                     <List sx={{paddingTop:10}}>
                         {/* {['Products', 'Carts'].map((text, index) => ( */}
-                        <ListItem disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <ShoppingBagIcon color='primary'/>
-                                </ListItemIcon>
-                                <ListItemText primary={"Products"} />
-                            </ListItemButton>
-                        </ListItem>
-                        <ListItem disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <ShoppingCartIcon color='primary'/>
-                                </ListItemIcon>
-                                <ListItemText primary={"Carts"} />
-                            </ListItemButton>
-                        </ListItem>
+                        <Link href="/products">
+                            <ListItem disablePadding>
+                                    <ListItemButton>
+                                        <ListItemIcon>
+                                            <ShoppingBagIcon color='primary'/>
+                                        </ListItemIcon>
+                                        <ListItemText primary={"Products"} />
+                                    </ListItemButton>
+                            </ListItem>
+                        </Link>
+                        <Link href="/carts">
+                            <ListItem disablePadding>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        <ShoppingCartIcon color='primary'/>
+                                    </ListItemIcon>
+                                    <ListItemText primary={"Carts"} />
+                                </ListItemButton>
+                            </ListItem>
+                        </Link>
                         {/* ))} */}
                     </List>
                 </div>
@@ -106,22 +115,26 @@ export default function SideBar(props: Props) {
                 <div>
                     <List>
                         {/* {['Products', 'Carts'].map((text, index) => ( */}
-                        <ListItem disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <ShoppingBagIcon color='primary'/>
-                                </ListItemIcon>
-                                <ListItemText primary={"Products"} />
-                            </ListItemButton>
-                        </ListItem>
-                        <ListItem disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <ShoppingCartIcon color='primary'/>
-                                </ListItemIcon>
-                                <ListItemText primary={"Carts"} />
-                            </ListItemButton>
-                        </ListItem>
+                        <Link href="/products">
+                            <ListItem disablePadding>
+                                    <ListItemButton>
+                                        <ListItemIcon>
+                                            <ShoppingBagIcon color='primary'/>
+                                        </ListItemIcon>
+                                        <ListItemText primary={"Products"} />
+                                    </ListItemButton>
+                            </ListItem>
+                        </Link>
+                        <Link href="/carts">
+                            <ListItem disablePadding>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        <ShoppingCartIcon color='primary'/>
+                                    </ListItemIcon>
+                                    <ListItemText primary={"Carts"} />
+                                </ListItemButton>
+                            </ListItem>
+                        </Link>
                         {/* ))} */}
                     </List>
                 </div>

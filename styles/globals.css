@@ -36,3 +36,54 @@ button {
   padding: 0.5rem 1rem;
   font-weight: bold;
 }
+.title {
+  margin-top: 20px;
+  line-height: 1.15;
+  /* font-size: 3.6rem; */
+}
+.table{
+  overflow-x: auto;
+  align-self: center;
+}
+.row{
+  display: flex;
+  flex-direction: row;
+}
+
+.col{
+  border-bottom: 2px solid rgb(207, 207, 207);
+  width: fit-content;
+  padding: 10px 0 10px 0;
+}
+
+.label{
+  text-align: center;
+  background-color: #6813d828;
+  border-bottom: 3px solid #6913D8;
+  height: 40px;
+  width: 200px;
+  min-width: 180px;
+  line-height: 40px;
+  margin: 0;
+}
+
+.data{
+  text-align: center;
+  height: auto;
+  width: 200px;
+  min-width: 180px;
+  line-height: 40px;
+  margin: 0;
+  font-size: small;
+  font-weight: 500;
+}
+
+.larger{
+  width: 250px;
+  min-width: 210px;
+}
+
+.container-loading{
+  margin-top: 20%;
+  align-self: center;
+}
