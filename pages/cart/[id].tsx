@@ -95,7 +95,7 @@ export default function Cart(cartData) {
                 </div>
                 {productsView.map((product) => (
                     // <ListItem disablePadding>
-                    <Link href={`/cart/${product.id}`}>
+                    <Link href={`/product/${product.id}`}>
                         <ListItemButton sx={{p:0}}>
                             <div className="col">
                                 <div className="row">

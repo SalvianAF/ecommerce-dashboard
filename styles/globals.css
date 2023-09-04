@@ -37,13 +37,17 @@ button {
   font-weight: bold;
 }
 .title {
-  margin-top: 20px;
+  padding-top: 10px;
   line-height: 1.15;
   /* font-size: 3.6rem; */
 }
 .table{
   overflow-x: auto;
   align-self: center;
+  width: 100%;
+  /* display: flex;
+  flex-direction: column;
+  flex: 1; */
 }
 .row{
   display: flex;
@@ -52,7 +56,7 @@ button {
 
 .col{
   border-bottom: 2px solid rgb(207, 207, 207);
-  width: fit-content;
+  width: 100%;
   padding: 10px 0 10px 0;
   display: flex;
   flex-direction: column;
@@ -62,18 +66,22 @@ button {
   text-align: center;
   background-color: #6813d828;
   border-bottom: 3px solid #6913D8;
-  height: 40px;
-  width: 200px;
-  min-width: 180px;
+  height: auto;
+  min-width: 80px;
+  flex: 1;
   line-height: 40px;
   margin: 0;
 }
 
 .data{
+  /* display: flex; */
   text-align: center;
   height: auto;
-  width: 200px;
-  min-width: 180px;
+  /* width: auto; */
+  /* width: 200px; */
+  min-width: 80px;
+  flex: 1;
+  /* flex-grow:1; */
   line-height: 40px;
   margin: 0;
   font-size: small;
@@ -81,8 +89,8 @@ button {
 }
 
 .larger{
-  width: 250px;
-  min-width: 210px;
+  min-width: 100px;
+  flex: 1.2;
 }
 
 .container-loading{
@@ -91,7 +99,12 @@ button {
 }
 
 .container-head{
-  height: 80px;
+  height: 60px;
   text-align: center;
 }
 
+@media only screen and (max-width: 600px) {
+  .table {
+      width: fit-content
+  }
+}
