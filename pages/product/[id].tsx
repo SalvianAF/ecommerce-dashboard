@@ -75,7 +75,7 @@ export default function Product(productData) {
                     src={product.thumbnail} // Route of the image file
                     height={300} // Desired size with correct aspect ratio
                     width={400} // Desired size with correct aspect ratio
-                    alt="Your Name"
+                    alt="thumbnail"
                     className={styles.img}
                 />
                 
