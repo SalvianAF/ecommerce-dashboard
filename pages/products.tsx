@@ -13,7 +13,7 @@ import MenuItem from '@mui/material/MenuItem';
 import ListSubheader from '@mui/material/ListSubheader';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { BarChart } from '@mui/x-charts/BarChart';
+// import { BarChart } from '@mui/x-charts/BarChart';
 
 
 interface ProductProps {
@@ -153,12 +153,12 @@ export default function Products(productProps:ProductProps) {
             <Pagination count={pages} page={page+1} sx={{mt:2, alignSelf:'center'}} color='primary'
             onChange={(e,value) => {setPage(value-1)}}/>
 
-<BarChart
+{/* <BarChart
   xAxis={[{ scaleType: 'band', data: ['group A', 'group B', 'group C'] }]}
   series={[{ data: [4,2,3] }]}
   width={500}
   height={300}
-/>
+/> */}
         </>
         }
     </Layout>
