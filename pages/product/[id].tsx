@@ -59,7 +59,7 @@ export default function Product(productData) {
         </div>
         :
         <>
-        {/* {console.log(product)} */}
+        {console.log(product)}
             <Head>
                 <title>Product Detail</title>
                 <link rel="icon" href="/favicon.ico" />
@@ -71,7 +71,7 @@ export default function Product(productData) {
                 </div>
 
                 <Image
-                    // loader={() => product.thumbnail}
+                    loader={() => product.thumbnail}
                     src={product.thumbnail} // Route of the image file
                     height={300} // Desired size with correct aspect ratio
                     width={400} // Desired size with correct aspect ratio
