@@ -59,7 +59,7 @@ export default function Product(productData) {
         </div>
         :
         <>
-        {console.log(product)}
+        {/* {console.log(product)} */}
             <Head>
                 <title>Product Detail</title>
                 <link rel="icon" href="/favicon.ico" />

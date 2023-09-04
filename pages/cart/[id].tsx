@@ -54,7 +54,7 @@ export default function Cart(cartData) {
         </div>
         :
         <>
-        {console.log(cart)}
+        {/* {console.log(cart)} */}
             <Head>
                 <title>Cart Detail</title>
                 <link rel="icon" href="/favicon.ico" />
