@@ -61,8 +61,8 @@ export default function Products(productProps:ProductProps) {
                 <h2 className="title">Product List</h2>
                 <TextField id="standard-basic" label="Search Product" variant="standard" sx={{mb:4, width:150}}
                 onChange={(e) => {
-                setSearch(e.target.value)
-                setPage(0)
+                    setSearch(e.target.value)
+                    setPage(0)
                 }}
                 />
             </div>
@@ -92,7 +92,7 @@ export default function Products(productProps:ProductProps) {
                 ))}
             </div>
             
-            <Pagination count={pages} page={page+1} sx={{mt:2, alignSelf:'end', marginRight:6}}
+            <Pagination count={pages} page={page+1} sx={{mt:2, alignSelf:'end', marginRight:6}} color='primary'
             onChange={(e,value) => {setPage(value-1)}}/>
 
         </>

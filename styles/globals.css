@@ -54,6 +54,8 @@ button {
   border-bottom: 2px solid rgb(207, 207, 207);
   width: fit-content;
   padding: 10px 0 10px 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .label{
@@ -87,3 +89,9 @@ button {
   margin-top: 20%;
   align-self: center;
 }
+
+.container-head{
+  height: 80px;
+  text-align: center;
+}
+

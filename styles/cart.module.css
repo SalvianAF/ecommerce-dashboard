@@ -1,0 +1,26 @@
+.container-detail{
+    width: 50%;
+    align-self: center;
+    text-align: start;
+    justify-self: center;
+    height: fit-content;
+    padding: 10px 0 10px 0;
+    margin-bottom: 30px;
+    background-color: #6813d828;
+}
+
+.title-detail{
+    margin: 0;
+    padding-left: 5%;
+}
+
+
+.around {
+    justify-content: space-around;
+}
+
+@media only screen and (max-width: 1000px) {
+    .container-detail {
+        width: 100%;
+    }
+  }

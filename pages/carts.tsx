@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import styles from '../styles/carts.module.css';
+// import styles from '../styles/carts.module.css';
 import Layout from '../components/layout';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
@@ -58,13 +58,14 @@ export default function Carts() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <div className={styles["container-head"]}>
+            <div className="container-head">
                 <h2 className="title">Cart List</h2>
             </div>
 
             <div className="table">
                 <div className="row">
-                <h5 className="label larger">User ID</h5>
+                <h5 className="label">Cart ID</h5>
+                <h5 className="label">User ID</h5>
                 <h5 className="label">Total Products</h5>
                 <h5 className="label">Total Quantity</h5>
                 <h5 className="label">Total Price</h5>
@@ -75,7 +76,8 @@ export default function Carts() {
                         <ListItemButton sx={{p:0}}>
                             <div className="col">
                                 <div className="row">
-                                    <p className="data larger">{cart.userId}</p>
+                                    <p className="data">{cart.id}</p>
+                                    <p className="data">{cart.userId}</p>
                                     <p className="data">{cart.totalProducts}</p>
                                     <p className="data">{cart.totalQuantity} </p>
                                     <p className="data">$&nbsp;{cart.total}</p>
