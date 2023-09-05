@@ -21,10 +21,6 @@ const drawerWidth = 240;
 
 
 interface Props {
-    /**
-     * Injected by the documentation to work in an iframe.
-     * You won't need it on your project.
-     */
     window?: () => Window;
   }
 
@@ -79,7 +75,6 @@ export default function SideBar(props: Props) {
             >
             <div>
                     <List sx={{paddingTop:10}}>
-                        {/* {['Products', 'Carts'].map((text, index) => ( */}
                         <Link href="/products">
                             <ListItem disablePadding>
                                     <ListItemButton>
@@ -114,7 +109,6 @@ export default function SideBar(props: Props) {
                 <Toolbar />
                 <div>
                     <List>
-                        {/* {['Products', 'Carts'].map((text, index) => ( */}
                         <Link href="/products">
                             <ListItem disablePadding>
                                     <ListItemButton>
@@ -135,7 +129,6 @@ export default function SideBar(props: Props) {
                                 </ListItemButton>
                             </ListItem>
                         </Link>
-                        {/* ))} */}
                     </List>
                 </div>
             </Drawer>

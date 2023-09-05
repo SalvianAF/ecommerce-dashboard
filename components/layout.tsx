@@ -7,12 +7,6 @@ export default function Layout({ children }) {
     <>
         <SideBar/>
         <main className={styles.layout}>{children}</main>
-        {/* <Box
-        component="main"
-        sx={{ flexGrow: 1, marginTop:10}}
-      >
-        {children}
-      </Box> */}
     </>
     );
   }

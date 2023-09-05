@@ -5,7 +5,6 @@
 }
 
 .container-detail{
-    /* background-color: #6813d828; */
     text-align: start;
     margin-top: 10px;
     padding: 20px;
@@ -21,7 +20,6 @@
     border-radius: 10px;
     border: 3px solid #6813d857 ;
     color: #6913D8;
-    /* color: #ffff; */
 }
 
 .img{
