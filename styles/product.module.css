@@ -1,7 +1,7 @@
 .container{
     align-self: center;
     text-align: center;
-    width: 600px;
+    max-width: 600px;
 }
 
 .container-detail{
@@ -15,7 +15,7 @@
 .container-head{
     text-align: center;
     padding-top: 5px;
-    height: 60px;
+    padding-bottom: 20px;
     margin-bottom: 10px;
     border-radius: 10px;
     border: 3px solid #6813d857 ;

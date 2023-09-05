@@ -62,9 +62,6 @@ export default function Products(productProps:ProductProps, chartDataProps:Chart
     }else{
         fetchProducts()
     }
-    if (selectedFilter == ""){
-        setPage(0)
-    }
   },[page, search, selectedFilter])
 
   useEffect(() => { //handle render for the first time
@@ -142,28 +139,19 @@ export default function Products(productProps:ProductProps, chartDataProps:Chart
   }
 
   const filterAllProduct = (filter:string, data:string) => { //filter product by brand and price range
-    // const tempProducts = [...allProducts]
-    // console.log(data)
     if (data){
         if(filter == "brand"){
             const tempProducts = allProducts.filter((prod) => {
-                // if (product.brand == data){
-                //     return false
-                // }
                 return prod[filter] == data
             })
-            // console.log(tempProducts)
             setProducts(tempProducts)
             setPages(Math.ceil(tempProducts.length / 5)) //total product pages
+
         }else if (filter == "price"){
             const [lowerLimit, upperLimit] = data.split(" ~ ")
             const tempProducts = allProducts.filter((prod) => {
-                // if (product.brand == data){
-                //     return false
-                // }
                 return prod.price > parseInt(lowerLimit) && prod.price < parseInt(upperLimit)
             })
-            // console.log(tempProducts)
             setProducts(tempProducts.slice(0,5))
             setFilteredProducts(tempProducts)
             setPages(Math.ceil(tempProducts.length / 5)) //total product pages
@@ -174,6 +162,12 @@ export default function Products(productProps:ProductProps, chartDataProps:Chart
         fetchProducts() //if category equals "" or None
     }
     
+  }
+
+  const checkFilter = () => {
+    if (selectedFilter == ""){
+        setPage(0)
+    }
   }
 
   return (
@@ -195,7 +189,6 @@ export default function Products(productProps:ProductProps, chartDataProps:Chart
                         <TextField id="standard-basic" label="Search Product" variant="standard" sx={{width:150, m:1}} value={search}
                             onChange={(e) => {
                                 setSearch(e.target.value)
-                                // filterAllProduct('brand', "Apple")
                                 setPage(0)
                                 setCategory("")
                                 setBrand("")
@@ -210,6 +203,7 @@ export default function Products(productProps:ProductProps, chartDataProps:Chart
                             onChange={(e) => {
                                 setSelectedFilter(e.target.value)
                                 setSearch("")
+                                checkFilter()
                             }}>
                                 <MenuItem value="">
                                     None
