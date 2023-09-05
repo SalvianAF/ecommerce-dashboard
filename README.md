@@ -1,4 +1,4 @@
-# Anime Collections
+# Ecommerce Dashboard
 ## Documentation
  - [here](https://docs.google.com/document/d/1s-FJzy3y2iXrYDMa2Kr17edunvSpmkkL3CDVSpoVFeM/edit?usp=sharing)
 ## Deploy Link

@@ -75,28 +75,32 @@ export default function Cart(cartData) {
                     </div>
                 </div>
 
-                <div className="table">
-                    <div className="row">
-                    <h5 className="label larger">Product Name</h5>
-                    <h5 className="label">Price</h5>
-                    <h5 className="label">Quantity</h5>
-                    <h5 className="label">Total</h5>
-                    </div>
-                    {productsView.map((product) => (
-                        <Link href={`/product/${product.id}`}>
-                            <ListItemButton sx={{p:0}}>
-                                <div className="col">
-                                    <div className="row">
-                                        <p className="data larger">{product.title}</p>
-                                        <p className="data">$&nbsp;{product.price} </p>
-                                        <p className="data">{product.quantity}</p>
-                                        <p className="data">$&nbsp;{product.total} </p>
+                {productsView? 
+                    <div className="table">
+                        <div className="row">
+                        <h5 className="label larger">Product Name</h5>
+                        <h5 className="label">Price</h5>
+                        <h5 className="label">Quantity</h5>
+                        <h5 className="label">Total</h5>
+                        </div>
+                        {productsView.map((product) => (
+                            <Link href={`/product/${product.id}`}>
+                                <ListItemButton sx={{p:0}}>
+                                    <div className="col">
+                                        <div className="row">
+                                            <p className="data larger">{product.title}</p>
+                                            <p className="data">$&nbsp;{product.price} </p>
+                                            <p className="data">{product.quantity}</p>
+                                            <p className="data">$&nbsp;{product.total} </p>
+                                        </div>
                                     </div>
-                                </div>
-                            </ListItemButton>
-                        </Link>
-                    ))}
-                </div>
+                                </ListItemButton>
+                            </Link>
+                        ))}
+                    </div>
+                :
+                    <></>
+                }
             </>
         }
     </Layout>
