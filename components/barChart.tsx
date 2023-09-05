@@ -41,6 +41,15 @@ export const options = {
               }
         },
     },
+    scales: {
+        y: {
+          ticks: {
+            autoSkip: false,
+            source: 'data',
+            stepSize:10
+          }
+        },
+    }
 };
 
 interface ChartDataProps {

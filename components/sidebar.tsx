@@ -15,18 +15,21 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { useState } from 'react';
 import { IconButton } from '@mui/material';
 import Link from 'next/link';
-
+import styles from './sideBar.module.css';
+import {useRouter} from 'next/router';
 
 const drawerWidth = 240;
 
-
 interface Props {
     window?: () => Window;
-  }
+}
+
+
 
 export default function SideBar(props: Props) {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = useState(false);
+    const router = useRouter()
   
     const handleDrawerToggle = () => {
       setMobileOpen(!mobileOpen);
@@ -74,26 +77,26 @@ export default function SideBar(props: Props) {
             }}
             >
             <div>
-                    <List sx={{paddingTop:10}}>
+                    <List sx={{paddingTop:10}} >
                         <Link href="/products">
-                            <ListItem disablePadding>
-                                    <ListItemButton>
+                            {/* <ListItem disablePadding > */}
+                                    <ListItemButton selected={"/products" === router.pathname}>
                                         <ListItemIcon>
                                             <ShoppingBagIcon color='primary'/>
                                         </ListItemIcon>
                                         <ListItemText primary={"Products"} />
                                     </ListItemButton>
-                            </ListItem>
+                            {/* </ListItem> */}
                         </Link>
                         <Link href="/carts">
-                            <ListItem disablePadding>
-                                <ListItemButton>
+                            {/* <ListItem disablePadding> */}
+                                <ListItemButton selected={"/carts" === router.pathname}>
                                     <ListItemIcon>
                                         <ShoppingCartIcon color='primary'/>
                                     </ListItemIcon>
                                     <ListItemText primary={"Carts"} />
                                 </ListItemButton>
-                            </ListItem>
+                            {/* </ListItem> */}
                         </Link>
                         {/* ))} */}
                     </List>
@@ -110,24 +113,24 @@ export default function SideBar(props: Props) {
                 <div>
                     <List>
                         <Link href="/products">
-                            <ListItem disablePadding>
-                                    <ListItemButton>
+                            {/* <ListItem disablePadding className={styles.menu}> */}
+                                    <ListItemButton selected={"/products" === router.pathname} >
                                         <ListItemIcon>
                                             <ShoppingBagIcon color='primary'/>
                                         </ListItemIcon>
                                         <ListItemText primary={"Products"} />
                                     </ListItemButton>
-                            </ListItem>
+                            {/* </ListItem> */}
                         </Link>
                         <Link href="/carts">
-                            <ListItem disablePadding>
-                                <ListItemButton>
+                            {/* <ListItem disablePadding> */}
+                                <ListItemButton selected={"/carts" === router.pathname}>
                                     <ListItemIcon>
                                         <ShoppingCartIcon color='primary'/>
                                     </ListItemIcon>
                                     <ListItemText primary={"Carts"} />
                                 </ListItemButton>
-                            </ListItem>
+                            {/* </ListItem> */}
                         </Link>
                     </List>
                 </div>

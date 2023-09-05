@@ -15,14 +15,14 @@ import Select from '@mui/material/Select';
   import BarChart from '../components/barChart';
 
 interface ProductProps {
-    products:[{
+    products:{
         title:string,
         brand:string,
         category:string,
         price:number,
         stock:number,
         id:number
-    },]
+    }[]
 
 }
 
@@ -37,6 +37,9 @@ interface ChartDataProps {
     }
 }
 
+const filters = ["brand", "category", "price"]
+const priceRange = ["1 ~ 100", "100 ~ 500", "500 ~ 1000", "1000 ~ 2000"]
+
 export default function Products(productProps:ProductProps, chartDataProps:ChartDataProps) {
   const [products, setProducts] = useState(productProps.products)
   const [page, setPage] = useState<number>(0)
@@ -44,21 +47,32 @@ export default function Products(productProps:ProductProps, chartDataProps:Chart
   const [search, setSearch] = useState<string>("")
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [categories, setCategories] = useState<string[]>([])
+  const [brands, setBrands] = useState<string[]>([])
   const [category, setCategory] = useState<string>("")
-  const [allProduct, setAllProduct] = useState<any>([])
-  const [labels, setLabels] = useState<string[]>([])
+  const [brand, setBrand] = useState<string>("")
+  const [price, setPrice] = useState<string>("")
   const [chartData, setChartData] = useState(chartDataProps.data)
+  const [allProducts, setAllProducts] = useState(productProps.products) //contain all the product
+  const [filteredProducts, setFilteredProducts] = useState(productProps.products) //contain filtered product
+  const [selectedFilter, setSelectedFilter] = useState("")
 
-  useEffect(() => {
-    fetchProducts()
-  },[page, search])
+  useEffect(() => { //handle search and page changes
+    if (selectedFilter){
+        sliceProduct()
+    }else{
+        fetchProducts()
+    }
+    if (selectedFilter == ""){
+        setPage(0)
+    }
+  },[page, search, selectedFilter])
 
-  useEffect(() => {
+  useEffect(() => { //handle render for the first time
     fetchCatagories()
     fetchAllProduct()
   },[])
 
-  useEffect(() => {
+  useEffect(() => {  //handle category changes
     fetchProductByCatagory()
   },[category])
 
@@ -69,6 +83,12 @@ export default function Products(productProps:ProductProps, chartDataProps:Chart
       setIsLoading(false)
     })
   } 
+
+  const sliceProduct = () => {
+    if (filteredProducts){
+        setProducts(filteredProducts.slice(5*page,5*page+5))
+    }
+  }
 
   const fetchCatagories = async() => {
     await axios.get(`https://dummyjson.com/products/categories`).then((res) => {
@@ -88,14 +108,20 @@ export default function Products(productProps:ProductProps, chartDataProps:Chart
   }
 
   const fetchAllProduct = async() => {
-    let tempAllProduct = {}
+    let tempAllProduct = []
+    const tempBrands = new Set(); 
     await axios.get('https://dummyjson.com/products?limit=100&skip=0&}&select=title,brand,price,category,stock').then((res) => {
         tempAllProduct = res.data.products
+        setAllProducts(res.data.products)
     })
+    tempAllProduct.map((prod) => {
+        tempBrands.add(prod.brand) //collecting all brands in dataset
+    })
+    setBrands(Array.from(tempBrands) as string[])
     makeBarChartData(tempAllProduct)
   }
 
-  const makeBarChartData = (rawData) => {
+  const makeBarChartData = (rawData) => { //to make data for bar chart
     const tempLabel:string[] = []
     const tempStock:number[] = []
     rawData.map((data) => {
@@ -115,6 +141,41 @@ export default function Products(productProps:ProductProps, chartDataProps:Chart
     setChartData(data)
   }
 
+  const filterAllProduct = (filter:string, data:string) => { //filter product by brand and price range
+    // const tempProducts = [...allProducts]
+    // console.log(data)
+    if (data){
+        if(filter == "brand"){
+            const tempProducts = allProducts.filter((prod) => {
+                // if (product.brand == data){
+                //     return false
+                // }
+                return prod[filter] == data
+            })
+            // console.log(tempProducts)
+            setProducts(tempProducts)
+            setPages(Math.ceil(tempProducts.length / 5)) //total product pages
+        }else if (filter == "price"){
+            const [lowerLimit, upperLimit] = data.split(" ~ ")
+            const tempProducts = allProducts.filter((prod) => {
+                // if (product.brand == data){
+                //     return false
+                // }
+                return prod.price > parseInt(lowerLimit) && prod.price < parseInt(upperLimit)
+            })
+            // console.log(tempProducts)
+            setProducts(tempProducts.slice(0,5))
+            setFilteredProducts(tempProducts)
+            setPages(Math.ceil(tempProducts.length / 5)) //total product pages
+            setPage(0)
+        }
+
+    }else{
+        fetchProducts() //if category equals "" or None
+    }
+    
+  }
+
   return (
     <Layout>
         {isLoading?
@@ -127,30 +188,92 @@ export default function Products(productProps:ProductProps, chartDataProps:Chart
                     <title>Dashboard Products</title>
                     <link rel="icon" href="/favicon.ico" />
                 </Head>
-
+                <h2 className={styles.title}>Product List</h2>
                 <div className={styles["container-head"]}>
-                    <h2 className={styles.title}>Product List</h2>
                     <div>
+                        
+                        <TextField id="standard-basic" label="Search Product" variant="standard" sx={{width:150, m:1}} value={search}
+                            onChange={(e) => {
+                                setSearch(e.target.value)
+                                // filterAllProduct('brand', "Apple")
+                                setPage(0)
+                                setCategory("")
+                                setBrand("")
+                                setPrice("")
+                                setSelectedFilter("")
+                            }}
+                        />
+
                         <FormControl sx={{ m: 1, minWidth: 150, mr:4, mt:2}} size="small">
                             <InputLabel htmlFor="grouped-select">Filter</InputLabel>
-                            <Select defaultValue="" id="grouped-select" label="Filter" autoWidth value={category}
+                            <Select defaultValue="" id="grouped-select" label="Filter" autoWidth value={selectedFilter}
                             onChange={(e) => {
-                                setCategory(e.target.value)
+                                setSelectedFilter(e.target.value)
+                                setSearch("")
                             }}>
                                 <MenuItem value="">
                                     None
                                 </MenuItem>
-                                {categories.map((category,idx) => (
-                                    <MenuItem value={category} key={category+idx}>{category}</MenuItem>
+                                {filters.map((filter,idx) => (
+                                    <MenuItem value={filter} key={filter+idx}>{filter}</MenuItem>
                                 ))}
                             </Select>
                         </FormControl>
-                        <TextField id="standard-basic" label="Search Product" variant="standard" sx={{width:150, m:1}}
-                        onChange={(e) => {
-                            setSearch(e.target.value)
-                            setPage(0)
-                        }}
-                        />
+
+                        {selectedFilter == "category"?
+                            <FormControl sx={{ m: 1, minWidth: 150, mr:4, mt:2}} size="small">
+                                <InputLabel htmlFor="grouped-select">Category</InputLabel>
+                                <Select defaultValue="" id="grouped-select" label="Category" autoWidth value={category}
+                                onChange={(e) => {
+                                    setCategory(e.target.value)
+                                    setSearch("")
+                                }}>
+                                    <MenuItem value="">
+                                        None
+                                    </MenuItem>
+                                    {categories.map((category,idx) => (
+                                        <MenuItem value={category} key={category+idx}>{category}</MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        :selectedFilter == "brand"?
+                            <FormControl sx={{ m: 1, minWidth: 150, mr:4, mt:2}} size="small">
+                                <InputLabel htmlFor="grouped-select">Brand</InputLabel>
+                                <Select defaultValue="" id="grouped-select" label="Brand" autoWidth value={brand}
+                                    onChange={(e) => {
+                                        filterAllProduct("brand", e.target.value)
+                                        setBrand(e.target.value)
+                                        setSearch("")
+                                    }}
+                                >
+                                    <MenuItem value="">
+                                        None
+                                    </MenuItem>
+                                    {brands.map((brand,idx) => (
+                                        <MenuItem value={brand} key={brand+idx}>{brand}</MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        :selectedFilter == "price"?
+                            <FormControl sx={{ m: 1, minWidth: 150, mr:4, mt:2}} size="small">
+                                <InputLabel htmlFor="grouped-select">Price</InputLabel>
+                                <Select defaultValue="" id="grouped-select" label="Price" autoWidth value={price}
+                                onChange={(e) => {
+                                    filterAllProduct("price", e.target.value)
+                                    setPrice(e.target.value)
+                                    setSearch("")
+                                }}>
+                                    <MenuItem value="">
+                                        None
+                                    </MenuItem>
+                                    {priceRange.map((price,idx) => (
+                                        <MenuItem value={price} key={"price"+idx}>$ &nbsp;{price}</MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        :<></>
+                        }
+
                     </div>
                 </div>
 
